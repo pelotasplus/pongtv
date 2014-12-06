@@ -4,7 +4,7 @@ import java.util.Random;
 
 public final class PongModel {
 
-    private static final int SHIFT = 10;
+    private static final int SHIFT = 30;
     private final float gameWidth, gameHeight;
     private final float padHeight;
     private float ballPositionX, ballPositionY;
@@ -58,7 +58,7 @@ public final class PongModel {
             directionX = -directionX;
             updateDirectionY(leftPosition);
         } else if (directionX > 0 && ballPositionX > gameWidth - padding && ballPositionY > rightPosition && ballPositionY < rightPosition + padHeight) {
-            directionX = -directionY;
+            directionX = -directionX;
             updateDirectionY(rightPosition);
         }
         updateCount++;
@@ -70,12 +70,12 @@ public final class PongModel {
 
     private void updateDirectionY(float padPosition) {
         if (ballPositionY < padPosition + padHeight / 3.0f) {
-            if (directionY < 3) {
-                directionY += new Random().nextDouble() / 2;
-            }
-        } else if (ballPositionY > padPosition + 2 * padHeight / 3.0f) {
             if (directionY > -3) {
                 directionY -= new Random().nextDouble() / 2;
+            }
+        } else if (ballPositionY > padPosition + 2 * padHeight / 3.0f) {
+            if (directionY < 3) {
+                directionY += new Random().nextDouble() / 2;
             }
         }
     }
