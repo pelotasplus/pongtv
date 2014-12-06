@@ -1,12 +1,16 @@
 package pl.pelotasplus.pongtv;
 
+import java.util.Random;
+
 public final class PongModel {
 
     public static final int SHIFT = 10;
+    public static final int BALL_SHIFT = 10;
     private final float gameWidth, gameHeight;
     private final float padHeight;
     private float ballPositionX, ballPositionY;
     private float leftPosition, rightPosition;
+    private int directionX, directionY;
 
     public PongModel(float gameWidth, float gameHeight) {
         this.gameWidth = gameWidth;
@@ -16,10 +20,21 @@ public final class PongModel {
         this.rightPosition = (gameHeight - padHeight) / 2;
         this.ballPositionX = gameWidth / 2;
         this.ballPositionY = gameHeight / 2;
+        Random r = new Random();
+        directionX = r.nextInt(2) * 2 - 1;
+        directionY = r.nextInt(2) * 2 - 1;
     }
 
     public void update() {
-
+        ballPositionX += BALL_SHIFT * directionX;
+        ballPositionY += BALL_SHIFT * directionY;
+        if (ballPositionY < 0) {
+            ballPositionY = -ballPositionY;
+            directionY = -directionY;
+        } else if (ballPositionY > gameHeight) {
+            ballPositionY = -ballPositionY + 2 * gameHeight;
+            directionY = -directionY;
+        }
     }
 
     public float getLeftPosition() {
