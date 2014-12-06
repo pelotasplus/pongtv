@@ -33,9 +33,18 @@ public class PongView extends View {
         init();
     }
 
-    public void tick() {
-        model.update();
+    public boolean tick() {
+        boolean resultChanged = model.update();
         invalidate();
+        return resultChanged;
+    }
+
+    public int getLeftScore() {
+        return model.getLeftPoints();
+    }
+
+    public int getRightScore() {
+        return model.getRightPoints();
     }
 
     public static enum Player {

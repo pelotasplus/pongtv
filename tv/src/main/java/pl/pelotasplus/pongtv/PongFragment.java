@@ -80,9 +80,9 @@ public class PongFragment extends android.app.Fragment
 
         pongView = (PongView) v.findViewById(R.id.pongView);
         playerLeftScoreTextView = (TextView) v.findViewById(R.id.playerLeftScoreTextView);
-        playerLeftScoreTextView.setText("3");
+        playerLeftScoreTextView.setText("0");
         playerRightScoreTextView = (TextView) v.findViewById(R.id.playerRightScoreTextView);
-        playerRightScoreTextView.setText("14");
+        playerRightScoreTextView.setText("0");
 
         return v;
     }
@@ -115,7 +115,10 @@ public class PongFragment extends android.app.Fragment
 //            pongView.changePlayerPosition(PongView.Player.LEFT, nextInt(-10, 10));
 //            pongView.changePlayerPosition(PongView.Player.RIGHT, nextInt(-10, 10));
 
-            pongView.tick();
+            if (pongView.tick()) {
+                playerLeftScoreTextView.setText(String.valueOf(pongView.getLeftScore()));
+                playerRightScoreTextView.setText(String.valueOf(pongView.getRightScore()));
+            }
 
             handler.postDelayed(randomMovementRunnable, DELAY);
         }
