@@ -9,7 +9,7 @@ public final class PongModel {
     private final float padHeight;
     private float ballPositionX, ballPositionY;
     private float leftPosition, rightPosition;
-    private int directionX, directionY;
+    private float directionX, directionY;
     private int leftPoints;
     private int rightPoints;
     private float padding;
@@ -54,16 +54,30 @@ public final class PongModel {
             leftPoints++;
             reset();
             return true;
-        } else if (ballPositionX < padding && ballPositionY > leftPosition && ballPositionY < leftPosition + padHeight) {
-            directionX = 1;
-        } else if (ballPositionX > gameWidth - padding && ballPositionY > rightPosition && ballPositionY < rightPosition + padHeight) {
-            directionX = -1;
+        } else if (directionX < 0 && ballPositionX < padding && ballPositionY > leftPosition && ballPositionY < leftPosition + padHeight) {
+            directionX = -directionX;
+            updateDirectionY(leftPosition);
+        } else if (directionX > 0 && ballPositionX > gameWidth - padding && ballPositionY > rightPosition && ballPositionY < rightPosition + padHeight) {
+            directionX = -directionY;
+            updateDirectionY(rightPosition);
         }
         updateCount++;
         if (updateCount % 1000 == 0) {
             ballShift++;
         }
         return false;
+    }
+
+    private void updateDirectionY(float padPosition) {
+        if (ballPositionY < padPosition + padHeight / 3.0f) {
+            if (directionY < 3) {
+                directionY += new Random().nextDouble() / 2;
+            }
+        } else if (ballPositionY > padPosition + 2 * padPosition / 3.0f) {
+            if (directionY > 3) {
+                directionY -= new Random().nextDouble() / 2;
+            }
+        }
     }
 
     public float getLeftPosition() {
