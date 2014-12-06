@@ -50,9 +50,9 @@ public final class PongModel {
             reset();
             return true;
         } else if (ballPositionX < 20 && ballPositionY > leftPosition && ballPositionY < leftPosition + padHeight) {
-            directionX = -directionX;
+            directionX = 1;
         } else if (ballPositionX > gameWidth - 20 && ballPositionY > rightPosition && ballPositionY < rightPosition + padHeight) {
-            directionX = -directionX;
+            directionX = -1;
         }
         return false;
     }
