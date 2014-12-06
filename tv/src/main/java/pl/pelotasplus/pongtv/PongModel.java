@@ -20,12 +20,12 @@ public final class PongModel {
         this.gameHeight = gameHeight;
         this.padding = padding;
         this.padHeight = gameHeight / 5;
+        this.leftPosition = (gameHeight - padHeight) / 2;
+        this.rightPosition = (gameHeight - padHeight) / 2;
         reset();
     }
 
     private void reset() {
-        this.leftPosition = (gameHeight - padHeight) / 2;
-        this.rightPosition = (gameHeight - padHeight) / 2;
         this.ballPositionX = gameWidth / 2;
         this.ballPositionY = gameHeight / 2;
         Random r = new Random();
