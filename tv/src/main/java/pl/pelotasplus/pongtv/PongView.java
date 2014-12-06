@@ -55,7 +55,7 @@ public class PongView extends View {
             if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
                 model.rightPositionDown();
             } else {
-                model.leftPositionUp();
+                model.rightPositionUp();
             }
         }
 
