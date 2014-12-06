@@ -52,22 +52,8 @@ public class PongView extends View {
         } else if (player == Player.RIGHT) {
             playerRightPosition += positionChange;
         }
-    }
 
-    public float getPlayerPosition(Player player) {
-        if (player == Player.LEFT) {
-            return playerLeftPosition;
-        } else {
-            return playerRightPosition;
-        }
-    }
-
-    public void setPlayerPosition(Player player, float playerPosition) {
-        if (player == Player.LEFT) {
-            playerLeftPosition = playerPosition;
-        } else if (player == Player.RIGHT) {
-            playerRightPosition = playerPosition;
-        }
+        invalidate();
     }
 
     private void init() {
@@ -79,6 +65,7 @@ public class PongView extends View {
 
         padPaint = new Paint();
         padPaint.setColor(getResources().getColor(android.R.color.white));
+
     }
 
     @Override
@@ -97,6 +84,9 @@ public class PongView extends View {
         padWidth = middleLineWidth;
         padHeight = (int) (0.2 * height);
         padPaint.setStrokeWidth(padWidth);
+
+        playerLeftPosition = (height - padHeight) / 2;
+        playerRightPosition = playerLeftPosition;
     }
 
     @Override
