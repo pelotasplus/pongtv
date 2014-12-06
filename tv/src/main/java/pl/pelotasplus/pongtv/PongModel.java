@@ -31,7 +31,7 @@ public final class PongModel {
         directionY = r.nextInt(2) * 2 - 1;
     }
 
-    public void update() {
+    public boolean update() {
         ballPositionX += BALL_SHIFT * directionX;
         ballPositionY += BALL_SHIFT * directionY;
         if (ballPositionY < 0) {
@@ -44,14 +44,17 @@ public final class PongModel {
         if (ballPositionX < 0) {
             rightPoints++;
             reset();
+            return true;
         } else if (ballPositionX > gameWidth) {
             leftPoints++;
             reset();
+            return true;
         } else if (ballPositionX < 20 && ballPositionY > leftPosition && ballPositionY < leftPosition + padHeight) {
             directionX = -directionX;
         } else if (ballPositionX > gameWidth - 20 && ballPositionY > rightPosition && ballPositionY < rightPosition + padHeight) {
             directionX = -directionX;
         }
+        return false;
     }
 
     public float getLeftPosition() {
