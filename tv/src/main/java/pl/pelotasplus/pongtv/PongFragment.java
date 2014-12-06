@@ -128,7 +128,7 @@ public class PongFragment extends android.app.Fragment
     public void onKeyDown(int keyCode, KeyEvent event) {
         PongView.Player player;
 
-        if (event.getDeviceId() == 2) {
+        if (event.getDeviceId() % 2 == 0) {
             player = PongView.Player.LEFT;
         } else {
             player = PongView.Player.RIGHT;
