@@ -74,7 +74,7 @@ public final class PongModel {
                 directionY += new Random().nextDouble() / 2;
             }
         } else if (ballPositionY > padPosition + 2 * padPosition / 3.0f) {
-            if (directionY > 3) {
+            if (directionY > -3) {
                 directionY -= new Random().nextDouble() / 2;
             }
         }
