@@ -133,9 +133,14 @@ public class PongFragment extends android.app.Fragment
         } else {
             player = PongView.Player.RIGHT;
         }
+        Log.e("tag", "keyCode: " + keyCode);
 
         if (keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-            pongView.changePlayerPosition(player, keyCode);
+            pongView.changePlayerPosition(PongView.Player.LEFT, keyCode);
+        } else if (keyCode == 23) {
+            pongView.changePlayerPosition(PongView.Player.RIGHT, KeyEvent.KEYCODE_DPAD_DOWN);
+        } else if (keyCode == 62) {
+            pongView.changePlayerPosition(PongView.Player.RIGHT, KeyEvent.KEYCODE_DPAD_UP);
         }
     }
 
