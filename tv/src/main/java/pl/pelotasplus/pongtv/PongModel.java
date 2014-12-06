@@ -47,6 +47,10 @@ public final class PongModel {
         } else if (ballPositionX > gameWidth) {
             leftPoints++;
             reset();
+        } else if (ballPositionX < 20 && ballPositionY > leftPosition && ballPositionY < leftPosition + padHeight) {
+            directionX = -directionX;
+        } else if (ballPositionX > gameWidth - 20 && ballPositionY > rightPosition && ballPositionY < rightPosition + padHeight) {
+            directionX = -directionX;
         }
     }
 
