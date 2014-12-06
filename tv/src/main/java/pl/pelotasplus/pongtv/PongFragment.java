@@ -14,6 +14,7 @@
 
 package pl.pelotasplus.pongtv;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -36,6 +37,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +55,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class PongFragment extends android.app.Fragment {
+public class PongFragment extends android.app.Fragment
+        implements TvMainActivity.GamePadMovement {
     private static final String TAG = PongFragment.class.getSimpleName();
     private static final long DELAY = 100;
 
@@ -83,7 +86,7 @@ public class PongFragment extends android.app.Fragment {
     public void onResume() {
         super.onResume();
 
-        handler.postDelayed(randomMovementRunnable, DELAY);
+//        handler.postDelayed(randomMovementRunnable, DELAY);
     }
 
     @Override
@@ -104,22 +107,41 @@ public class PongFragment extends android.app.Fragment {
 
         @Override
         public void run() {
-            // random position
-            float position;
+            pongView.changePlayerPosition(PongView.Player.LEFT, nextInt(-10, 10));
 
-            position = pongView.getPlayerLeftPosition();
-            position += nextInt(-10, 10);
-
-            pongView.setPlayerLeftPosition(position);
-
-            position = pongView.getPlayerRightPosition();
-            position += nextInt(-10, 10);
-
-            pongView.setPlayerRightPosition(position);
+            pongView.changePlayerPosition(PongView.Player.RIGHT, nextInt(-10, 10));
 
             pongView.invalidate();
 
             handler.postDelayed(randomMovementRunnable, DELAY);
         }
+    }
+
+    @Override
+    public void onKeyDown(int keyCode, KeyEvent event) {
+        PongView.Player player;
+
+        if (event.getDeviceId() == 2) {
+            player = PongView.Player.LEFT;
+        } else {
+            player = PongView.Player.RIGHT;
+        }
+
+        int change;
+
+        if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+            change = -10;
+        } else {
+            change = 10;
+        }
+
+        pongView.changePlayerPosition(player, change);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        ((TvMainActivity) activity).addListener(this);
     }
 }

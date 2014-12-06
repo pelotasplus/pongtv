@@ -28,6 +28,12 @@ public class PongView extends View {
         init();
     }
 
+    public static enum Player {
+        LEFT, RIGHT
+    }
+
+//    int ballX, ballY
+
     int width, height, halfWidth;
     int middleLineWidth;
 
@@ -40,20 +46,28 @@ public class PongView extends View {
     float playerLeftPosition = 500;
     float playerRightPosition = 250;
 
-    public float getPlayerLeftPosition() {
-        return playerLeftPosition;
+    public void changePlayerPosition(Player player, float positionChange) {
+        if (player == Player.LEFT) {
+            playerLeftPosition += positionChange;
+        } else if (player == Player.RIGHT) {
+            playerRightPosition += positionChange;
+        }
     }
 
-    public void setPlayerLeftPosition(float playerLeftPosition) {
-        this.playerLeftPosition = playerLeftPosition;
+    public float getPlayerPosition(Player player) {
+        if (player == Player.LEFT) {
+            return playerLeftPosition;
+        } else {
+            return playerRightPosition;
+        }
     }
 
-    public float getPlayerRightPosition() {
-        return playerRightPosition;
-    }
-
-    public void setPlayerRightPosition(float playerRightPosition) {
-        this.playerRightPosition = playerRightPosition;
+    public void setPlayerPosition(Player player, float playerPosition) {
+        if (player == Player.LEFT) {
+            playerLeftPosition = playerPosition;
+        } else if (player == Player.RIGHT) {
+            playerRightPosition = playerPosition;
+        }
     }
 
     private void init() {
