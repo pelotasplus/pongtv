@@ -108,10 +108,7 @@ public class PongFragment extends android.app.Fragment
         @Override
         public void run() {
             pongView.changePlayerPosition(PongView.Player.LEFT, nextInt(-10, 10));
-
             pongView.changePlayerPosition(PongView.Player.RIGHT, nextInt(-10, 10));
-
-            pongView.invalidate();
 
             handler.postDelayed(randomMovementRunnable, DELAY);
         }
