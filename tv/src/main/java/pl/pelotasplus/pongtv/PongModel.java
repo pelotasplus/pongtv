@@ -5,7 +5,7 @@ import java.util.Random;
 public final class PongModel {
 
     public static final int SHIFT = 10;
-    public static final int BALL_SHIFT = 10;
+    public static final int BALL_SHIFT = 3;
     private final float gameWidth, gameHeight;
     private final float padHeight;
     private float ballPositionX, ballPositionY;
@@ -13,10 +13,12 @@ public final class PongModel {
     private int directionX, directionY;
     private int leftPoints;
     private int rightPoints;
+    private float padding;
 
-    public PongModel(float gameWidth, float gameHeight) {
+    public PongModel(float gameWidth, float gameHeight, float padding) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
+        this.padding = padding;
         this.padHeight = gameHeight / 5;
         reset();
     }
@@ -49,9 +51,9 @@ public final class PongModel {
             leftPoints++;
             reset();
             return true;
-        } else if (ballPositionX < 20 && ballPositionY > leftPosition && ballPositionY < leftPosition + padHeight) {
+        } else if (ballPositionX < padding && ballPositionY > leftPosition && ballPositionY < leftPosition + padHeight) {
             directionX = 1;
-        } else if (ballPositionX > gameWidth - 20 && ballPositionY > rightPosition && ballPositionY < rightPosition + padHeight) {
+        } else if (ballPositionX > gameWidth - padding && ballPositionY > rightPosition && ballPositionY < rightPosition + padHeight) {
             directionX = -1;
         }
         return false;

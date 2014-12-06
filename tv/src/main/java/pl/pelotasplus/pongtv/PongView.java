@@ -59,6 +59,8 @@ public class PongView extends View {
     int padWidth;//padHeight;
     int padPadding;
 
+    int ballSize;
+
     Paint backgroundColor, elementsColor, padPaint, ballPaint;
 
     public void changePlayerPosition(Player player, int keyCode) {
@@ -92,6 +94,7 @@ public class PongView extends View {
         ballPaint = new Paint();
 
         ball = BitmapFactory.decodeResource(getResources(), R.drawable.ball);
+        ballSize = ball.getWidth();
     }
 
     @Override
@@ -106,11 +109,11 @@ public class PongView extends View {
         middleLineWidth = (int) (0.006 * width);
         elementsColor.setStrokeWidth(middleLineWidth);
 
-        padPadding = (int) (0.025 * width);
         padWidth = middleLineWidth;
+        padPadding = padWidth; //(int) (0.025 * width);
         padPaint.setStrokeWidth(padWidth);
 
-        model = new PongModel(w, h);
+        model = new PongModel(w, h, padWidth + ballSize / 2);
     }
 
     @Override
@@ -160,8 +163,8 @@ public class PongView extends View {
     private void drawBall(Canvas canvas) {
         canvas.drawBitmap(
                 ball,
-                model.getBallPositionX(),
-                model.getBallPositionY(),
+                model.getBallPositionX() - ballSize / 2,
+                model.getBallPositionY() - ballSize / 2,
                 padPaint);
     }
 }

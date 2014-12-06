@@ -58,7 +58,7 @@ import java.util.TimerTask;
 public class PongFragment extends android.app.Fragment
         implements TvMainActivity.GamePadMovement {
     private static final String TAG = PongFragment.class.getSimpleName();
-    private static final long DELAY = 100;
+    private static final long DELAY = 1;
 
     PongView pongView;
     TextView playerLeftScoreTextView, playerRightScoreTextView;
@@ -91,7 +91,7 @@ public class PongFragment extends android.app.Fragment
     public void onResume() {
         super.onResume();
 
-        handler.postDelayed(randomMovementRunnable, DELAY);
+        handler.postDelayed(randomMovementRunnable, DELAY * 100);
     }
 
     @Override
