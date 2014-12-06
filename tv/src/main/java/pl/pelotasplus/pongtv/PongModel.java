@@ -52,9 +52,9 @@ public final class PongModel {
     }
 
     public void rightPositionUp() {
-        leftPosition += SHIFT;
-        if (leftPosition < 0) {
-            leftPosition = 0;
+        rightPosition -= SHIFT;
+        if (rightPosition < 0) {
+            rightPosition = 0;
         }
     }
 

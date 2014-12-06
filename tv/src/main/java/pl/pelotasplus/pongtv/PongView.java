@@ -48,13 +48,13 @@ public class PongView extends View {
         if (player == Player.LEFT) {
             if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
                 model.leftPositionDown();
-            } else {
+            } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
                 model.leftPositionUp();
             }
         } else if (player == Player.RIGHT) {
             if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
                 model.rightPositionDown();
-            } else {
+            } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
                 model.rightPositionUp();
             }
         }
