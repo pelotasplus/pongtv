@@ -33,6 +33,11 @@ public class PongView extends View {
         init();
     }
 
+    public void tick() {
+        model.update();
+        invalidate();
+    }
+
     public static enum Player {
         LEFT, RIGHT
     }
