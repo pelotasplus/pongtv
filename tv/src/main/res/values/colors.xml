@@ -15,7 +15,6 @@
     <color name="yellow">#EEFF41</color>
     <color name="default_background">#3d3d3d</color>
 
-
-
     <color name="pong_background">@android:color/black</color>
+    <color name="score_text_color">#77FFFFFF</color>
 </resources>

@@ -4,9 +4,26 @@
     android:layout_height="match_parent"
     style="@style/PongFragmentStyle">
 
+
     <pl.pelotasplus.pongtv.PongView
         android:id="@+id/pongView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
+    <LinearLayout
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/playerLeftScoreTextView"
+            style="@style/ScoreTextView" />
+
+        <TextView
+            android:id="@+id/playerRightScoreTextView"
+            style="@style/ScoreTextView" />
+
+    </LinearLayout>
 
 </RelativeLayout>

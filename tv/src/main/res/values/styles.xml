@@ -6,4 +6,13 @@
     <style name="PongFragmentStyle">
         <item name="android:background">@color/pong_background</item>
     </style>
+
+    <style name="ScoreTextView">
+        <item name="android:textColor">@color/score_text_color</item>
+        <item name="android:textSize">@dimen/score_text_size</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

@@ -61,6 +61,7 @@ public class PongFragment extends android.app.Fragment
     private static final long DELAY = 100;
 
     PongView pongView;
+    TextView playerLeftScoreTextView, playerRightScoreTextView;
     Handler handler;
     RandomMovementRunnable randomMovementRunnable;
 
@@ -78,6 +79,10 @@ public class PongFragment extends android.app.Fragment
         View v = inflater.inflate(R.layout.pong_fragment, container, false);
 
         pongView = (PongView) v.findViewById(R.id.pongView);
+        playerLeftScoreTextView = (TextView) v.findViewById(R.id.playerLeftScoreTextView);
+        playerLeftScoreTextView.setText("3");
+        playerRightScoreTextView = (TextView) v.findViewById(R.id.playerRightScoreTextView);
+        playerRightScoreTextView.setText("14");
 
         return v;
     }
