@@ -16,18 +16,37 @@ package pl.pelotasplus.pongtv;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 
 /*
  * MainActivity class that loads MainFragment
  */
 public class TvMainActivity extends Activity {
-    /**
-     * Called when the activity is first created.
-     */
+    private static final String TAG = TvMainActivity.class.getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_tv_main);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (listener != null) {
+            listener.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    GamePadMovement listener = null;
+
+    public void addListener(GamePadMovement listener) {
+        this.listener = listener;
+    }
+
+    public interface GamePadMovement {
+        public void onKeyDown(int keyCode, KeyEvent event);
     }
 }
