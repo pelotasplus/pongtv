@@ -12,6 +12,10 @@ public final class PongModel {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.padHeight = gameHeight / 5;
+        this.leftPosition = (gameHeight - padHeight) / 2;
+        this.rightPosition = (gameHeight - padHeight) / 2;
+        this.ballPositionX = gameWidth / 2;
+        this.ballPositionY = gameHeight / 2;
     }
 
     public void update() {
@@ -52,5 +56,17 @@ public final class PongModel {
         if (leftPosition < 0) {
             leftPosition = 0;
         }
+    }
+
+    public float getBallPositionX() {
+        return ballPositionX;
+    }
+
+    public float getBallPositionY() {
+        return ballPositionY;
+    }
+
+    public float getPadHeight() {
+        return padHeight;
     }
 }

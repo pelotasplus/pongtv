@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 
 /**
@@ -12,6 +13,7 @@ import android.view.View;
  */
 public class PongView extends View {
     private static final String TAG = PongView.class.getSimpleName();
+    private PongModel model;
 
     public PongView(Context context) {
         super(context);
@@ -37,29 +39,23 @@ public class PongView extends View {
     int width, height, halfWidth;
     int middleLineWidth;
 
-    int padWidth, padHeight;
+    int padWidth;//padHeight;
     int padPadding;
 
     Paint backgroundColor, elementsColor, padPaint;
 
-    /* data from the model, to be added later */
-    float playerLeftPosition = 500;
-    float playerRightPosition = 250;
-
-    public void changePlayerPosition(Player player, float positionChange) {
+    public void changePlayerPosition(Player player, int keyCode) {
         if (player == Player.LEFT) {
-            playerLeftPosition += positionChange;
-            if (playerLeftPosition < 0) {
-                playerLeftPosition = 0;
-            } else if (playerLeftPosition + padHeight > height) {
-                playerLeftPosition = height - padHeight;
+            if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                model.leftPositionDown();
+            } else {
+                model.leftPositionUp();
             }
         } else if (player == Player.RIGHT) {
-            playerRightPosition += positionChange;
-            if (playerRightPosition < 0) {
-                playerRightPosition = 0;
-            } else if (playerRightPosition + padHeight > height) {
-                playerRightPosition = height - padHeight;
+            if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                model.rightPositionDown();
+            } else {
+                model.leftPositionUp();
             }
         }
 
@@ -92,11 +88,9 @@ public class PongView extends View {
 
         padPadding = (int) (0.025 * width);
         padWidth = middleLineWidth;
-        padHeight = (int) (0.2 * height);
         padPaint.setStrokeWidth(padWidth);
 
-        playerLeftPosition = (height - padHeight) / 2;
-        playerRightPosition = playerLeftPosition;
+        model = new PongModel(w, h);
     }
 
     @Override
@@ -112,18 +106,18 @@ public class PongView extends View {
         // left player
         canvas.drawLine(
                 padPadding,
-                playerLeftPosition,
+                model.getLeftPosition(),
                 padPadding,
-                playerLeftPosition + padHeight,
+                model.getLeftPosition() + model.getPadHeight(),
                 padPaint
         );
 
         // right player
         canvas.drawLine(
                 width - padPadding,
-                playerRightPosition,
+                model.getRightPosition(),
                 width - padPadding,
-                playerRightPosition + padHeight,
+                model.getRightPosition() + model.getPadHeight(),
                 padPaint
         );
     }
