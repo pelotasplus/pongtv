@@ -4,4 +4,9 @@
     android:layout_height="match_parent"
     style="@style/PongFragmentStyle">
 
+    <pl.pelotasplus.pongtv.PongView
+        android:id="@+id/pongView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </RelativeLayout>
