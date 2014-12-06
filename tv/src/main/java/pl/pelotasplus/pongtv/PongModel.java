@@ -11,6 +11,8 @@ public final class PongModel {
     private float ballPositionX, ballPositionY;
     private float leftPosition, rightPosition;
     private int directionX, directionY;
+    private int leftPoints;
+    private int rightPoints;
 
     public PongModel(float gameWidth, float gameHeight) {
         this.gameWidth = gameWidth;
@@ -83,5 +85,13 @@ public final class PongModel {
 
     public float getPadHeight() {
         return padHeight;
+    }
+
+    public int getLeftPoints() {
+        return leftPoints;
+    }
+
+    public int getRightPoints() {
+        return rightPoints;
     }
 }
