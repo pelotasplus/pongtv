@@ -1,6 +1,8 @@
 package pl.pelotasplus.pongtv;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
@@ -14,6 +16,7 @@ import android.view.View;
 public class PongView extends View {
     private static final String TAG = PongView.class.getSimpleName();
     private PongModel model;
+    private Bitmap ball;
 
     public PongView(Context context) {
         super(context);
@@ -42,7 +45,7 @@ public class PongView extends View {
     int padWidth;//padHeight;
     int padPadding;
 
-    Paint backgroundColor, elementsColor, padPaint;
+    Paint backgroundColor, elementsColor, padPaint, ballPaint;
 
     public void changePlayerPosition(Player player, int keyCode) {
         if (player == Player.LEFT) {
@@ -72,6 +75,9 @@ public class PongView extends View {
         padPaint = new Paint();
         padPaint.setColor(getResources().getColor(android.R.color.white));
 
+        ballPaint = new Paint();
+
+        ball = BitmapFactory.decodeResource(getResources(), R.drawable.ball);
     }
 
     @Override
@@ -100,6 +106,7 @@ public class PongView extends View {
         drawBackground(canvas);
         drawLine(canvas);
         drawPads(canvas);
+        drawBall(canvas);
     }
 
     private void drawPads(Canvas canvas) {
@@ -134,5 +141,13 @@ public class PongView extends View {
                 height,
                 elementsColor
         );
+    }
+
+    private void drawBall(Canvas canvas) {
+        canvas.drawBitmap(
+                ball,
+                model.getBallPositionX(),
+                model.getBallPositionY(),
+                padPaint);
     }
 }
