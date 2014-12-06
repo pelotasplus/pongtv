@@ -49,8 +49,18 @@ public class PongView extends View {
     public void changePlayerPosition(Player player, float positionChange) {
         if (player == Player.LEFT) {
             playerLeftPosition += positionChange;
+            if (playerLeftPosition < 0) {
+                playerLeftPosition = 0;
+            } else if (playerLeftPosition + padHeight > height) {
+                playerLeftPosition = height - padHeight;
+            }
         } else if (player == Player.RIGHT) {
             playerRightPosition += positionChange;
+            if (playerRightPosition < 0) {
+                playerRightPosition = 0;
+            } else if (playerRightPosition + padHeight > height) {
+                playerRightPosition = height - padHeight;
+            }
         }
 
         invalidate();
